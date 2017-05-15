@@ -1,0 +1,31 @@
+﻿@model WinemakersAssociation.Areas.Backend.Models.HomeModels.ListModel
+@{
+    ViewBag.Title = "Page editing";
+}
+
+<table class="table table-bordered table-responsive table-striped">
+    <tr>
+        <th style="width: 50px;"></th>
+        <th style="width: 50px;"></th>
+        <th>
+            Name
+        </th>
+    </tr>
+    @foreach (var page in Model.Pages)
+    {
+        <tr>
+            <td class="text-center">
+                <a asp-area="Backend" asp-controller="Page" asp-action="Edit" asp-route-type="@page.Key">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </a>
+            </td>
+            <td class="text-center">
+                <a asp-area="Backend" asp-controller="PageContent" asp-action="List" asp-route-type="@page.Key">
+                    <span class="glyphicon glyphicon-list-alt"></span>
+                </a>
+            </td>
+            <td>@page.Value</td>
+        </tr>
+    }
+
+</table> 

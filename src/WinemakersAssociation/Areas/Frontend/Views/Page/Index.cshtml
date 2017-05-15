@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = Model.Page.Name;
+}
+@using WinemakersAssociation.Areas.Frontend.Models.HomeModels
+@using WinemakersAssociation.Data.Entities
+@model WinemakersAssociation.Areas.Frontend.Models.HomeModels.IndexModel
+@{
+    var subPages = Model.Page.Contents?.Where(subP => subP.Published).ToList() ?? new List<PageContentEntity>();
+}
+
+@if (!subPages.Any())
+{
+    @: Page is empty
+}
+else if (!Model.Page.IsMultipage)
+{
+
+    Html.RenderPartial("Details", subPages.First());
+}
+else
+{
+
+    foreach (var content in subPages)
+    {
+        <div class="clearfix">
+            <div class="row">
+                <div class="col-xs-10">
+                    <a asp-action="Details" asp-route-id="@content.Id">@content.Title</a>
+                </div>
+                <div class="col-xs-2">
+                    <span class="pull-right">@content.Created.ToString("dd-MM-yyyy")</span>
+                </div>
+            </div>
+        </div>
+    }
+}

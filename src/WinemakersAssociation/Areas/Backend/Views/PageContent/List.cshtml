@@ -1,0 +1,30 @@
+﻿@model WinemakersAssociation.Areas.Backend.Models.PageContentModels.ListModel
+@{
+    ViewBag.Title = "Редагування вмісту сторінки " + Model.Page.Name;
+}
+
+<div class="well well-sm">
+    <a asp-action="Edit" asp-route-type="@Model.Page.Type" class="btn btn-default">Create</a>
+</div>
+<table class="table table-bordered table-responsive table-striped">
+    <tr>
+        <th style="width: 50px;"></th>
+        <th>
+            Title
+        </th>
+        <th style="width: 50px;">Displayed</th>
+    </tr>
+    @foreach (var page in Model.Page.Contents)
+    {
+        <tr>
+            <td class="text-center">
+                <a asp-area="Backend" asp-controller="PageContent" asp-action="Edit" asp-route-id="@page.Id">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </a>
+            </td>
+            <td>@page.Title</td>
+            <td class="text-center"><span class="glyphicon @(page.Published ? "glyphicon-ok" : "glyphicon-remove")"></span></td>
+        </tr>
+    }
+
+</table> 

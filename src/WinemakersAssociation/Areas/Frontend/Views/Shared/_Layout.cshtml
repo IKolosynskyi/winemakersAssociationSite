@@ -1,0 +1,49 @@
+﻿@using WinemakersAssociation.Business.Repositories.Interfaces
+@using WinemakersAssociation.Data.Enums
+@inject IPageRepository PageRepository
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var pages = PageRepository.GetPages();
+}
+@section scripts{
+    @RenderSection("scripts", false)
+}
+
+@section header{
+    <header class="header">
+        <div class="title">
+            <a asp-area="Frontend" class="title-link" asp-controller="Page" asp-action="Index" asp-route-type="">
+                <img src="@Url.Content("~/images/logo.png")" alt="" />
+                Winemakers association
+            </a>
+        </div>
+    </header>
+
+}
+
+<div class="body-container">
+    <div class="body-content">
+        <h3 class="title"><strong>@ViewBag.Title</strong></h3>
+        @RenderBody()
+    </div>
+    <div class="additional-panel">
+
+        <div class="additional-block">
+            <h3>Menu</h3>
+            <ul class="nav nav-primary">
+                @foreach (var page in pages)
+                {
+                    <li>
+                        <a asp-area="Frontend" asp-controller="Page" asp-action="Index" asp-route-type="@(page.Key == PageType.About ? string.Empty : page.Key.ToString().ToLowerInvariant())">
+                        @page.Value
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer>Winemakers association © 2017</footer>
+
+<link href="https://fonts.googleapis.com/css?family=Arsenal" rel="stylesheet">

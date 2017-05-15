@@ -1,0 +1,13 @@
+﻿{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "WinemakersAssociation.Data": "1.0.0-*",
+    "WinemakersAssociation.Persistence": "1.0.0-*"
+  },
+
+
+  "frameworks": {
+    "net452": {}
+  }
+}
